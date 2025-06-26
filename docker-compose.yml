@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: roadsafety_postgres
+    environment:
+      POSTGRES_DB: roadsafety
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - roadsafety_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: roadsafety_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - roadsafety_network
+
+  backend:
+    build: ./backend
+    container_name: roadsafety_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/roadsafety
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./backend:/app
+      - audio_files:/app/app/static/audio
+    networks:
+      - roadsafety_network
+
+  frontend:
+    build: ./frontend
+    container_name: roadsafety_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
+      - VITE_WS_URL=ws://localhost:8000/ws
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - roadsafety_network
+
+volumes:
+  postgres_data:
+  redis_data:
+  audio_files:
+
+networks:
+  roadsafety_network:
+    driver: bridge
