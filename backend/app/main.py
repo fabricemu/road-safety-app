@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from app.api import tts, lessons, quiz, websocket
+from app.api import tts, lessons, quiz, websocket, auth, courses
 from app.core.config import settings
 from app.core.database import engine
 from app.models import lesson, quiz as quiz_models, user, audio
@@ -31,6 +31,8 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 # Include routers
+app.include_router(auth.router, tags=["Authentication"])
+app.include_router(courses.router, tags=["Courses"])
 app.include_router(tts.router, prefix="/api", tags=["TTS"])
 app.include_router(lessons.router, prefix="/api", tags=["Lessons"])
 app.include_router(quiz.router, prefix="/api", tags=["Quiz"])
