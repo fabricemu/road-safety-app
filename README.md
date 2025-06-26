@@ -197,103 +197,70 @@ road-safety-app/
 - `GET /api/tts/cleanup` - Clean up old audio files
 
 ### WebSocket
-- `WS /ws/quiz` - Real-time quiz interaction
+- `ws://localhost:8000/ws/quiz/{quiz_id}` - Real-time quiz interaction
 
-## 🔊 TTS Language Support
+## 🌐 Environment Variables
 
-| Language    | Model                                            | Status |
-| ----------- | ------------------------------------------------ | ------ |
-| English     | `tts_models/en/ljspeech/tacotron2-DDC`           | ✅     |
-| French      | `tts_models/fr/mai/tacotron2-DDC`                | ✅     |
-| Kinyarwanda | `tts_models/multilingual/multi-dataset/your_tts` | ✅     |
+### Backend (.env)
+```env
+DATABASE_URL=postgresql://postgres:your_password@localhost:5432/roadsafety
+REDIS_URL=redis://localhost:6379
+SECRET_KEY=your-secret-key-here
+TTS_MODELS_DIR=app/static/tts_models
+AUDIO_OUTPUT_DIR=app/static/audio
+```
 
 ## 🗄️ Database Schema
 
 ### Tables
-- **lessons** - Road safety lessons
-- **quizzes** - Quiz collections
-- **quiz_questions** - Individual quiz questions
-- **quiz_responses** - User quiz responses
-- **users** - User accounts (future feature)
+- **lessons** - Road safety lessons with multilingual content
+- **quizzes** - Quiz metadata and configuration
+- **quiz_questions** - Individual quiz questions with options
+- **quiz_responses** - User quiz responses and scoring
+- **users** - User accounts and preferences
 - **audio_files** - Generated TTS audio files
 
-## 🧪 Development
+## 🚀 Deployment
 
-### Running Tests
+### Docker Deployment
 ```bash
-# Backend tests
-cd backend
-pytest
+# Build and start all services
+docker-compose up -d
 
-# Frontend tests
-cd frontend
-npm test
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
 ```
 
-### Database Migrations
-```bash
-cd backend
-
-# Create new migration
-alembic revision --autogenerate -m "Description"
-
-# Apply migrations
-alembic upgrade head
-
-# Rollback migration
-alembic downgrade -1
-```
-
-### Code Formatting
-```bash
-# Backend
-cd backend
-black .
-isort .
-
-# Frontend
-cd frontend
-npm run lint
-npm run format
-```
-
-## 🌐 Deployment
-
-### Production Setup
-1. Set up PostgreSQL and Redis servers
-2. Configure environment variables
-3. Build and deploy containers
-4. Set up reverse proxy (nginx)
-5. Configure SSL certificates
-
-### Environment Variables
-```env
-# Production
-DATABASE_URL=postgresql://user:pass@host:5432/db
-REDIS_URL=redis://host:6379
-SECRET_KEY=your-production-secret-key
-ALLOWED_ORIGINS=["https://yourdomain.com"]
-```
+### Production Considerations
+- Set up proper environment variables
+- Configure SSL/TLS certificates
+- Set up database backups
+- Configure monitoring and logging
+- Set up CI/CD pipeline
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📄 License
+## 📝 License
 
-MIT License © 2024 Road Safety Learning Platform
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- Coqui TTS for multilingual text-to-speech
+- Coqui TTS for multilingual text-to-speech support
 - FastAPI for the excellent web framework
-- React team for the amazing frontend library
+- React and TypeScript for the frontend framework
+- PostgreSQL for the reliable database
 - All contributors and supporters
 
 ---
 
-**Built with ❤️ for safer roads worldwide**
+**Made with ❤️ for road safety education**
