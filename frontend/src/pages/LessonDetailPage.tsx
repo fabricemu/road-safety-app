@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Volume2, BookOpen } from 'lucide-react';
+import { ArrowLeft, Play, Volume2, BookOpen } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { apiService } from '../services/api';
+import apiService from '../services/api';
 import type {Lesson} from '../types';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';

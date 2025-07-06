@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, XCircle, Timer } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { apiService } from '../services/api';
+import apiService from '../services/api';
 import type { Quiz, QuizQuestion } from '../types';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';

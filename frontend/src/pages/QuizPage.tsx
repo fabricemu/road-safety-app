@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HelpCircle, Play, Trophy } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { apiService } from '../services/api';
+import apiService from '../services/api';
 import type {Quiz} from '../types';
-import Card from '../components/ui/Card';
+import Card  from '../components/ui/Card';
 import Button from '../components/ui/Button';
 
 const QuizPage: React.FC = () => {

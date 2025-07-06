@@ -2,12 +2,12 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:15
+    image: postgres:15-alpine
     container_name: roadsafety_postgres
     environment:
       POSTGRES_DB: roadsafety
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD:
     ports:
       - "5432:5432"
     volumes:
@@ -31,7 +31,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/roadsafety
+      - DATABASE_URL=postgresql://postgres:fab@postgres:5432/roadsafety
       - REDIS_URL=redis://redis:6379
     depends_on:
       - postgres

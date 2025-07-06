@@ -6,6 +6,7 @@ from app.models.audio import AudioFile
 from app.schemas.tts import TTSRequest, TTSResponse
 from app.core.config import settings
 from typing import Optional
+from TTS.api import TTS
 
 class TTSService:
     def __init__(self):

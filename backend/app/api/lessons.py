@@ -16,7 +16,7 @@ def get_lessons(
 ):
     """Get all lessons with optional filtering"""
     lessons = LessonService.get_lessons(db, skip=skip, limit=limit, language=language)
-    return lessons
+    return lessons 
 
 @router.get("/lessons/{lesson_id}", response_model=Lesson)
 def get_lesson(lesson_id: int, db: Session = Depends(get_db)):

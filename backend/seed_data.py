@@ -13,6 +13,7 @@ from app.core.database import SessionLocal, engine
 from app.models import lesson, quiz as quiz_models, user, audio
 from app.schemas.lesson import LessonCreate
 from app.schemas.quiz import QuizCreate, QuizQuestionCreate
+from TTS.api import TTS
 
 def create_lessons(db: Session):
     """Create initial lessons"""
@@ -168,7 +169,7 @@ def create_quizzes(db: Session):
     }
     
     for quiz in quizzes:
-        language = quiz.language
+        language = str(quiz.language)
         if language in questions_data:
             for question_data in questions_data[language]:
                 question_data["quiz_id"] = quiz.id

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, BookOpen, Volume2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { apiService } from '../services/api';
+import apiService from '../services/api';
 import type {Lesson} from '../types';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from app.api import tts, lessons, quiz, websocket, auth, courses
+from app.api import tts, lessons, quiz, websocket, auth, courses, users, analytics, pdf_upload
 from app.core.config import settings
 from app.core.database import engine
 from app.models import lesson, quiz as quiz_models, user, audio
@@ -37,6 +37,9 @@ app.include_router(tts.router, prefix="/api", tags=["TTS"])
 app.include_router(lessons.router, prefix="/api", tags=["Lessons"])
 app.include_router(quiz.router, prefix="/api", tags=["Quiz"])
 app.include_router(websocket.router, tags=["WebSocket"])
+app.include_router(users.router, prefix="/api", tags=["Users"])
+app.include_router(analytics.router, prefix="/api", tags=["Analytics"])
+app.include_router(pdf_upload.router, prefix="/api", tags=["PDF Upload"])
 
 @app.get("/")
 async def root():
